@@ -9,7 +9,6 @@ import {
   ClockIcon,
   TrophyIcon,
   FireIcon,
-  ChartBarIcon,
   PlayIcon,
   UserGroupIcon,
   StarIcon
@@ -24,32 +23,28 @@ export default function DashboardPage() {
       value: "12",
       change: "+2 this week",
       icon: BookOpenIcon,
-      color: "text-blue-500",
-      bgColor: "bg-blue-500/10"
+      color: "text-blue-400"
     },
     {
       title: "Hours Learned",
       value: "48h",
       change: "+8h this week",
       icon: ClockIcon,
-      color: "text-green-500",
-      bgColor: "bg-green-500/10"
+      color: "text-green-400"
     },
     {
       title: "Achievements",
       value: "24",
       change: "+3 new badges",
       icon: TrophyIcon,
-      color: "text-yellow-500",
-      bgColor: "bg-yellow-500/10"
+      color: "text-yellow-400"
     },
     {
       title: "Learning Streak",
       value: "7 days",
       change: "Keep it up!",
       icon: FireIcon,
-      color: "text-red-500",
-      bgColor: "bg-red-500/10"
+      color: "text-red-400"
     }
   ];
 
@@ -58,38 +53,28 @@ export default function DashboardPage() {
       title: "Advanced React Patterns",
       progress: 75,
       instructor: "Sarah Johnson",
-      duration: "2h 30m left",
-      thumbnail: "bg-gradient-to-br from-blue-500 to-purple-600"
+      duration: "2h 30m left"
     },
     {
       title: "Node.js Masterclass",
       progress: 45,
       instructor: "Michael Chen",
-      duration: "4h 15m left",
-      thumbnail: "bg-gradient-to-br from-green-500 to-teal-600"
+      duration: "4h 15m left"
     },
     {
       title: "UI/UX Design Fundamentals",
       progress: 90,
       instructor: "Emily Rodriguez",
-      duration: "30m left",
-      thumbnail: "bg-gradient-to-br from-pink-500 to-rose-600"
+      duration: "30m left"
     }
-  ];
-
-  const achievements = [
-    { name: "First Course", icon: "🎯", earned: true },
-    { name: "Week Warrior", icon: "⚡", earned: true },
-    { name: "Knowledge Seeker", icon: "🔍", earned: true },
-    { name: "Master Learner", icon: "🏆", earned: false }
   ];
 
   if (!user) {
     return (
       <div className="flex items-center justify-center min-h-screen">
         <div className="flex items-center space-x-2">
-          <div className="w-8 h-8 border-4 border-primary/30 border-t-primary rounded-full animate-spin" />
-          <span className="text-muted-foreground">Loading user details...</span>
+          <div className="w-6 h-6 border-2 border-blue-600/30 border-t-blue-600 rounded-full animate-spin" />
+          <span className="text-muted-foreground">Loading...</span>
         </div>
       </div>
     );
@@ -101,26 +86,21 @@ export default function DashboardPage() {
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
+        transition={{ duration: 0.5 }}
         className="flex items-center justify-between"
       >
         <div>
-          <h1 className="text-3xl font-bold text-foreground">
+          <h1 className="text-3xl font-bold">
             Welcome back, <span className="gradient-text">{user.username}</span>! 👋
           </h1>
           <p className="text-muted-foreground mt-2">
-            Ready to continue your learning journey? Let's pick up where you left off.
+            Ready to continue your learning journey?
           </p>
         </div>
-        <motion.div
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-        >
-          <Button className="bg-primary hover:bg-primary/90">
-            <PlayIcon className="h-4 w-4 mr-2" />
-            Continue Learning
-          </Button>
-        </motion.div>
+        <Button className="bg-blue-600 hover:bg-blue-700">
+          <PlayIcon className="h-4 w-4 mr-2" />
+          Continue Learning
+        </Button>
       </motion.div>
 
       {/* Stats Grid */}
@@ -130,24 +110,24 @@ export default function DashboardPage() {
             key={stat.title}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: index * 0.1 }}
-            whileHover={{ y: -5 }}
+            transition={{ duration: 0.5, delay: index * 0.1 }}
+            className="hover-lift"
           >
-            <Card className="glass-effect hover:shadow-lg transition-all duration-300">
+            <Card className="glass-card">
               <CardContent className="p-6">
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-sm font-medium text-muted-foreground">
                       {stat.title}
                     </p>
-                    <p className="text-2xl font-bold text-foreground mt-2">
+                    <p className="text-2xl font-bold mt-2">
                       {stat.value}
                     </p>
                     <p className={`text-xs mt-1 ${stat.color}`}>
                       {stat.change}
                     </p>
                   </div>
-                  <div className={`p-3 rounded-full ${stat.bgColor}`}>
+                  <div className="p-3 rounded-lg bg-secondary">
                     <stat.icon className={`h-6 w-6 ${stat.color}`} />
                   </div>
                 </div>
@@ -162,36 +142,32 @@ export default function DashboardPage() {
         <motion.div
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
+          transition={{ duration: 0.5, delay: 0.4 }}
           className="lg:col-span-2"
         >
-          <Card className="glass-effect">
+          <Card className="glass-card">
             <CardHeader>
               <CardTitle className="flex items-center space-x-2">
-                <BookOpenIcon className="h-5 w-5 text-primary" />
+                <BookOpenIcon className="h-5 w-5 text-blue-400" />
                 <span>Continue Learning</span>
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               {recentCourses.map((course, index) => (
-                <motion.div
+                <div
                   key={course.title}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.4, delay: 0.5 + index * 0.1 }}
-                  whileHover={{ scale: 1.02 }}
-                  className="flex items-center space-x-4 p-4 rounded-lg bg-secondary/20 hover:bg-secondary/30 transition-colors cursor-pointer"
+                  className="flex items-center space-x-4 p-4 rounded-lg bg-secondary/50 hover:bg-secondary transition-colors cursor-pointer hover-lift"
                 >
-                  <div className={`w-16 h-16 rounded-lg ${course.thumbnail} flex items-center justify-center`}>
-                    <PlayIcon className="h-6 w-6 text-white" />
+                  <div className="w-12 h-12 rounded-lg bg-blue-600/20 flex items-center justify-center">
+                    <PlayIcon className="h-5 w-5 text-blue-400" />
                   </div>
                   <div className="flex-1">
-                    <h3 className="font-semibold text-foreground">{course.title}</h3>
+                    <h3 className="font-semibold">{course.title}</h3>
                     <p className="text-sm text-muted-foreground">by {course.instructor}</p>
                     <div className="flex items-center space-x-2 mt-2">
                       <div className="flex-1 bg-secondary rounded-full h-2">
                         <div 
-                          className="bg-primary h-2 rounded-full transition-all duration-300"
+                          className="bg-blue-600 h-2 rounded-full transition-all duration-300"
                           style={{ width: `${course.progress}%` }}
                         />
                       </div>
@@ -204,80 +180,41 @@ export default function DashboardPage() {
                       Continue
                     </Button>
                   </div>
-                </motion.div>
+                </div>
               ))}
             </CardContent>
           </Card>
         </motion.div>
 
-        {/* Achievements & Activity */}
-        <div className="space-y-6">
-          {/* Achievements */}
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.6 }}
-          >
-            <Card className="glass-effect">
-              <CardHeader>
-                <CardTitle className="flex items-center space-x-2">
-                  <TrophyIcon className="h-5 w-5 text-yellow-500" />
-                  <span>Achievements</span>
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="grid grid-cols-2 gap-3">
-                  {achievements.map((achievement, index) => (
-                    <motion.div
-                      key={achievement.name}
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{ duration: 0.4, delay: 0.7 + index * 0.1 }}
-                      className={`p-3 rounded-lg text-center transition-all duration-300 ${
-                        achievement.earned 
-                          ? 'bg-primary/10 border border-primary/20' 
-                          : 'bg-secondary/20 border border-border/50 opacity-50'
-                      }`}
-                    >
-                      <div className="text-2xl mb-1">{achievement.icon}</div>
-                      <p className="text-xs font-medium">{achievement.name}</p>
-                    </motion.div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-          </motion.div>
-
-          {/* Quick Actions */}
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.8 }}
-          >
-            <Card className="glass-effect">
-              <CardHeader>
-                <CardTitle className="flex items-center space-x-2">
-                  <ChartBarIcon className="h-5 w-5 text-primary" />
-                  <span>Quick Actions</span>
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-3">
-                <Button variant="outline" className="w-full justify-start">
-                  <BookOpenIcon className="h-4 w-4 mr-2" />
-                  Browse Courses
-                </Button>
-                <Button variant="outline" className="w-full justify-start">
-                  <UserGroupIcon className="h-4 w-4 mr-2" />
-                  Join Study Group
-                </Button>
-                <Button variant="outline" className="w-full justify-start">
-                  <StarIcon className="h-4 w-4 mr-2" />
-                  Rate Courses
-                </Button>
-              </CardContent>
-            </Card>
-          </motion.div>
-        </div>
+        {/* Quick Actions */}
+        <motion.div
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.5, delay: 0.6 }}
+        >
+          <Card className="glass-card">
+            <CardHeader>
+              <CardTitle className="flex items-center space-x-2">
+                <TrophyIcon className="h-5 w-5 text-yellow-400" />
+                <span>Quick Actions</span>
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-3">
+              <Button variant="outline" className="w-full justify-start">
+                <BookOpenIcon className="h-4 w-4 mr-2" />
+                Browse Courses
+              </Button>
+              <Button variant="outline" className="w-full justify-start">
+                <UserGroupIcon className="h-4 w-4 mr-2" />
+                Join Study Group
+              </Button>
+              <Button variant="outline" className="w-full justify-start">
+                <StarIcon className="h-4 w-4 mr-2" />
+                Rate Courses
+              </Button>
+            </CardContent>
+          </Card>
+        </motion.div>
       </div>
     </div>
   );

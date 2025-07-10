@@ -26,126 +26,58 @@ export function Footer() {
       { name: "Documentation", href: "#docs" },
       { name: "API", href: "#api" },
     ],
-    legal: [
-      { name: "Privacy", href: "#privacy" },
-      { name: "Terms", href: "#terms" },
-      { name: "Security", href: "#security" },
-      { name: "Cookies", href: "#cookies" },
-    ],
   };
 
   return (
-    <footer className="bg-background border-t border-border/40">
+    <footer className="bg-card border-t border-border">
       <div className="container mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
           {/* Brand Section */}
           <div className="lg:col-span-2">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="flex items-center space-x-2 mb-4"
-            >
-              <div className="p-2 rounded-lg bg-primary/10">
-                <BookOpenIcon className="h-6 w-6 text-primary" />
+            <div className="flex items-center space-x-2 mb-4">
+              <div className="p-2 rounded-lg bg-blue-600/10">
+                <BookOpenIcon className="h-6 w-6 text-blue-400" />
               </div>
               <span className="text-xl font-bold gradient-text">SkillBridge</span>
-            </motion.div>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="text-muted-foreground mb-6 max-w-sm"
-            >
-              Empowering learners worldwide with cutting-edge courses and expert mentorship. 
-              Your journey to mastery starts here.
-            </motion.p>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="flex items-center space-x-4"
-            >
-              {/* Social Media Icons */}
-              <div className="flex space-x-3">
-                {['twitter', 'linkedin', 'github', 'youtube'].map((social, index) => (
-                  <motion.a
-                    key={social}
-                    href={`#${social}`}
-                    whileHover={{ scale: 1.1, y: -2 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="w-10 h-10 rounded-full bg-secondary/50 flex items-center justify-center hover:bg-primary/20 transition-colors"
-                  >
-                    <div className="w-5 h-5 bg-muted-foreground rounded-sm"></div>
-                  </motion.a>
-                ))}
-              </div>
-            </motion.div>
+            </div>
+            <p className="text-muted-foreground mb-6 max-w-sm">
+              Empowering learners worldwide with cutting-edge courses and expert mentorship.
+            </p>
           </div>
 
           {/* Links Sections */}
-          {Object.entries(footerLinks).map(([category, links], categoryIndex) => (
-            <motion.div
-              key={category}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: categoryIndex * 0.1 }}
-            >
-              <h3 className="font-semibold text-foreground mb-4 capitalize">
-                {category}
-              </h3>
+          {Object.entries(footerLinks).map(([category, links]) => (
+            <div key={category}>
+              <h3 className="font-semibold mb-4 capitalize">{category}</h3>
               <ul className="space-y-3">
-                {links.map((link, linkIndex) => (
-                  <motion.li
-                    key={link.name}
-                    initial={{ opacity: 0, x: -10 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.4, delay: linkIndex * 0.05 }}
-                  >
+                {links.map((link) => (
+                  <li key={link.name}>
                     <Link
                       href={link.href}
-                      className="text-muted-foreground hover:text-primary transition-colors duration-200 text-sm"
+                      className="text-muted-foreground hover:text-blue-400 transition-colors text-sm"
                     >
                       {link.name}
                     </Link>
-                  </motion.li>
+                  </li>
                 ))}
               </ul>
-            </motion.div>
+            </div>
           ))}
         </div>
 
         {/* Bottom Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="mt-12 pt-8 border-t border-border/40 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0"
-        >
+        <div className="mt-12 pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
           <div className="flex items-center space-x-2 text-sm text-muted-foreground">
             <span>© {currentYear} SkillBridge. Made with</span>
-            <motion.div
-              animate={{ scale: [1, 1.2, 1] }}
-              transition={{ duration: 1, repeat: Infinity, repeatDelay: 2 }}
-            >
-              <HeartIcon className="h-4 w-4 text-red-500" />
-            </motion.div>
+            <HeartIcon className="h-4 w-4 text-red-500" />
             <span>for learners everywhere.</span>
           </div>
           
-          <div className="flex items-center space-x-6 text-sm text-muted-foreground">
-            <Link href="#status" className="hover:text-primary transition-colors">
-              System Status
-            </Link>
-            <Link href="#changelog" className="hover:text-primary transition-colors">
-              Changelog
-            </Link>
-            <div className="flex items-center space-x-2">
-              <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-              <span>All systems operational</span>
-            </div>
+          <div className="flex items-center space-x-2">
+            <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+            <span className="text-sm text-muted-foreground">All systems operational</span>
           </div>
-        </motion.div>
+        </div>
       </div>
     </footer>
   );

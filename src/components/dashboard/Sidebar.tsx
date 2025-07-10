@@ -32,8 +32,8 @@ export function Sidebar() {
     <motion.div
       initial={{ x: -300 }}
       animate={{ x: 0 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
-      className="fixed left-0 top-16 h-[calc(100vh-4rem)] w-64 bg-sidebar border-r border-sidebar-border overflow-y-auto"
+      transition={{ duration: 0.5 }}
+      className="fixed left-0 top-16 h-[calc(100vh-4rem)] w-64 bg-card border-r border-border overflow-y-auto"
     >
       <div className="p-6">
         <nav className="space-y-2">
@@ -44,26 +44,20 @@ export function Sidebar() {
                 key={item.name}
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.4, delay: index * 0.05 }}
+                transition={{ duration: 0.3, delay: index * 0.05 }}
               >
                 <Link
                   href={item.href}
                   className={`
-                    flex items-center space-x-3 px-4 py-3 rounded-lg text-sm font-medium transition-all duration-200
+                    flex items-center space-x-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors
                     ${isActive 
-                      ? 'bg-sidebar-primary text-sidebar-primary-foreground shadow-lg' 
-                      : 'text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground'
+                      ? 'bg-blue-600 text-white' 
+                      : 'text-muted-foreground hover:bg-secondary hover:text-foreground'
                     }
                   `}
                 >
                   <item.icon className="h-5 w-5" />
                   <span>{item.name}</span>
-                  {isActive && (
-                    <motion.div
-                      layoutId="activeIndicator"
-                      className="ml-auto w-2 h-2 bg-sidebar-primary-foreground rounded-full"
-                    />
-                  )}
                 </Link>
               </motion.div>
             );
@@ -74,48 +68,23 @@ export function Sidebar() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="mt-8 p-4 bg-sidebar-accent rounded-lg"
+          transition={{ duration: 0.5, delay: 0.4 }}
+          className="mt-8 p-4 bg-secondary rounded-lg"
         >
-          <h3 className="text-sm font-semibold text-sidebar-accent-foreground mb-3">
-            Quick Stats
-          </h3>
+          <h3 className="text-sm font-semibold mb-3">Quick Stats</h3>
           <div className="space-y-2">
             <div className="flex justify-between text-xs">
-              <span className="text-sidebar-foreground/70">Courses Completed</span>
-              <span className="font-medium text-sidebar-primary">12</span>
+              <span className="text-muted-foreground">Courses</span>
+              <span className="font-medium text-blue-400">12</span>
             </div>
             <div className="flex justify-between text-xs">
-              <span className="text-sidebar-foreground/70">Hours Learned</span>
-              <span className="font-medium text-sidebar-primary">48h</span>
+              <span className="text-muted-foreground">Hours</span>
+              <span className="font-medium text-blue-400">48h</span>
             </div>
             <div className="flex justify-between text-xs">
-              <span className="text-sidebar-foreground/70">Streak</span>
-              <span className="font-medium text-sidebar-primary">7 days</span>
+              <span className="text-muted-foreground">Streak</span>
+              <span className="font-medium text-blue-400">7 days</span>
             </div>
-          </div>
-        </motion.div>
-
-        {/* Upgrade Banner */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.6 }}
-          className="mt-6 p-4 bg-gradient-to-br from-primary/10 to-purple-600/10 rounded-lg border border-primary/20"
-        >
-          <div className="text-center">
-            <div className="w-8 h-8 mx-auto mb-2 bg-primary/20 rounded-full flex items-center justify-center">
-              <AcademicCapIcon className="h-4 w-4 text-primary" />
-            </div>
-            <h3 className="text-sm font-semibold text-foreground mb-1">
-              Upgrade to Pro
-            </h3>
-            <p className="text-xs text-muted-foreground mb-3">
-              Unlock premium courses and features
-            </p>
-            <button className="w-full px-3 py-1.5 bg-primary text-primary-foreground text-xs font-medium rounded-md hover:bg-primary/90 transition-colors">
-              Upgrade Now
-            </button>
           </div>
         </motion.div>
       </div>

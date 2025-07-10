@@ -32,63 +32,44 @@ function LoginForm({ onSwitchToRegister }: { onSwitchToRegister: () => void }) {
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6 }}
+      transition={{ duration: 0.5 }}
     >
-      <Card className="glass-effect border-border/50 shadow-2xl">
-        <CardHeader className="text-center pb-8">
-          <motion.div
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="w-16 h-16 mx-auto mb-4 bg-primary/10 rounded-full flex items-center justify-center"
-          >
-            <UserIcon className="h-8 w-8 text-primary" />
-          </motion.div>
+      <Card className="glass-card shadow-2xl">
+        <CardHeader className="text-center space-y-4">
+          <div className="w-12 h-12 mx-auto bg-blue-600/10 rounded-lg flex items-center justify-center">
+            <UserIcon className="h-6 w-6 text-blue-400" />
+          </div>
           <CardTitle className="text-2xl font-bold">Welcome Back</CardTitle>
-          <CardDescription className="text-muted-foreground">
+          <CardDescription>
             Sign in to continue your learning journey
           </CardDescription>
         </CardHeader>
         
         <form onSubmit={handleLogin}>
-          <CardContent className="space-y-6">
+          <CardContent className="space-y-4">
             {error && (
-              <motion.div
-                initial={{ opacity: 0, x: -10 }}
-                animate={{ opacity: 1, x: 0 }}
-                className="p-4 text-sm text-red-400 bg-red-500/10 border border-red-500/20 rounded-lg"
-              >
+              <div className="p-3 text-sm text-red-400 bg-red-500/10 border border-red-500/20 rounded-lg">
                 {error}
-              </motion.div>
+              </div>
             )}
             
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.3 }}
-              className="space-y-2"
-            >
-              <Label htmlFor="username" className="text-sm font-medium">Username</Label>
+            <div className="space-y-2">
+              <Label htmlFor="username">Username</Label>
               <div className="relative">
                 <UserIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                 <Input
                   id="username"
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
-                  className="pl-10 bg-background/50 border-border/50 focus:border-primary/50"
+                  className="pl-10"
                   placeholder="Enter your username"
                   required
                 />
               </div>
-            </motion.div>
+            </div>
             
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.4 }}
-              className="space-y-2"
-            >
-              <Label htmlFor="password" className="text-sm font-medium">Password</Label>
+            <div className="space-y-2">
+              <Label htmlFor="password">Password</Label>
               <div className="relative">
                 <LockClosedIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                 <Input
@@ -96,7 +77,7 @@ function LoginForm({ onSwitchToRegister }: { onSwitchToRegister: () => void }) {
                   type={showPassword ? "text" : "password"}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="pl-10 pr-10 bg-background/50 border-border/50 focus:border-primary/50"
+                  className="pl-10 pr-10"
                   placeholder="Enter your password"
                   required
                 />
@@ -112,47 +93,28 @@ function LoginForm({ onSwitchToRegister }: { onSwitchToRegister: () => void }) {
                   )}
                 </button>
               </div>
-            </motion.div>
+            </div>
           </CardContent>
           
-          <CardFooter className="flex flex-col space-y-4 pt-6">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5 }}
-              className="w-full"
+          <CardFooter className="flex flex-col space-y-4">
+            <Button
+              type="submit"
+              className="w-full bg-blue-600 hover:bg-blue-700"
+              disabled={isLoading}
             >
-              <Button
-                type="submit"
-                className="w-full bg-primary hover:bg-primary/90 animate-glow"
-                disabled={isLoading}
-              >
-                {isLoading ? (
-                  <div className="flex items-center space-x-2">
-                    <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                    <span>Signing In...</span>
-                  </div>
-                ) : (
-                  "Sign In"
-                )}
-              </Button>
-            </motion.div>
+              {isLoading ? "Signing In..." : "Sign In"}
+            </Button>
             
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.6 }}
-              className="text-center text-sm text-muted-foreground"
-            >
+            <div className="text-center text-sm text-muted-foreground">
               Don't have an account?{" "}
               <button
                 type="button"
                 onClick={onSwitchToRegister}
-                className="font-semibold text-primary hover:text-primary/80 transition-colors"
+                className="font-medium text-blue-400 hover:text-blue-300"
               >
                 Create one now
               </button>
-            </motion.div>
+            </div>
           </CardFooter>
         </form>
       </Card>
@@ -174,7 +136,7 @@ export default function AuthPage() {
   if (isLoading || isAuthenticated) {
     return (
       <div className="flex items-center justify-center space-x-2">
-        <div className="w-8 h-8 border-4 border-primary/30 border-t-primary rounded-full animate-spin" />
+        <div className="w-6 h-6 border-2 border-blue-600/30 border-t-blue-600 rounded-full animate-spin" />
         <span className="text-muted-foreground">Loading...</span>
       </div>
     );
