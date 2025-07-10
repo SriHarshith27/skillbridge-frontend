@@ -58,7 +58,7 @@ export function RegisterForm({ onSuccess }: RegisterFormProps) {
         onSuccess();
       }, 2000);
     } catch (err: any) {
-      setError(err.message || "An unexpected error occurred.");
+      setError((err as Error).message || "An unexpected error occurred.");
     } finally {
       setIsLoading(false);
     }

@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "framer-motion";
 import { BookOpenIcon, HeartIcon } from "@heroicons/react/24/outline";
 
 export function Footer() {

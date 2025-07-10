@@ -7,7 +7,6 @@ import {
   UserGroupIcon, 
   AcademicCapIcon,
   ChartBarIcon,
-  StarIcon,
   PlayIcon,
   ArrowRightIcon
 } from "@heroicons/react/24/outline";
@@ -167,12 +166,12 @@ export default function LandingPage() {
           </motion.div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {features.map((feature, index) => (
+            {features.map((feature, featureIndex) => (
               <motion.div
                 key={feature.title}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
+                transition={{ duration: 0.6, delay: featureIndex * 0.1 }}
                 className="hover-lift"
               >
                 <Card className="h-full glass-card">
