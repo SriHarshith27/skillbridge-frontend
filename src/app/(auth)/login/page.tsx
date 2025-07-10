@@ -35,7 +35,7 @@ function LoginForm({ onSwitchToRegister }: { onSwitchToRegister: () => void }) {
     try {
       await login({ username, password });
     } catch (err: any) {
-      setError((err as Error).message || "An unexpected error occurred.");
+      setError(err instanceof Error ? err.message : "An unexpected error occurred.");
     }
   };
 
@@ -215,7 +215,7 @@ function RegisterForm({ onSwitchToLogin }: { onSwitchToLogin: () => void }) {
         onSwitchToLogin();
       }, 2000);
     } catch (err: any) {
-      setError((err as Error).message || "An unexpected error occurred.");
+      setError(err instanceof Error ? err.message : "An unexpected error occurred.");
     } finally {
       setIsLoading(false);
     }

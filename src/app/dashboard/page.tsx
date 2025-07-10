@@ -155,7 +155,7 @@ export default function DashboardPage() {
             <CardContent className="space-y-4">
               {recentCourses.map((course, index) => (
                 <div
-                  key={course.title}
+                  key={`${course.title}-${courseIndex}`}
                   className="flex items-center space-x-4 p-4 rounded-lg bg-secondary/50 hover:bg-secondary transition-colors cursor-pointer hover-lift"
                 >
                   <div className="w-12 h-12 rounded-lg bg-blue-600/20 flex items-center justify-center">

@@ -60,7 +60,7 @@ export default function LandingPage() {
             >
               <div className="space-y-6">
                 <motion.div
-                  initial={{ opacity: 0, y: 20 }}
+                  key={`${feature.title}-${featureIndex}`}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.2 }}
                   className="inline-flex items-center px-3 py-1 rounded-full bg-blue-600/10 text-blue-400 text-sm font-medium border border-blue-600/20"
