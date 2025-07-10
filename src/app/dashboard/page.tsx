@@ -153,7 +153,7 @@ export default function DashboardPage() {
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
-              {recentCourses.map((course, index) => (
+              {recentCourses.map((course, courseIndex) => (
                 <div
                   key={`${course.title}-${courseIndex}`}
                   className="flex items-center space-x-4 p-4 rounded-lg bg-secondary/50 hover:bg-secondary transition-colors cursor-pointer hover-lift"

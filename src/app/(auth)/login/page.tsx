@@ -34,7 +34,7 @@ function LoginForm({ onSwitchToRegister }: { onSwitchToRegister: () => void }) {
     setError(null);
     try {
       await login({ username, password });
-    } catch (err: any) {
+    } catch (err: unknown) {
       setError(err instanceof Error ? err.message : "An unexpected error occurred.");
     }
   };
@@ -164,7 +164,7 @@ function LoginForm({ onSwitchToRegister }: { onSwitchToRegister: () => void }) {
           </Button>
           
           <div className="text-center">
-            <span className="text-sm text-muted-foreground">Don't have an account? </span>
+            <span className="text-sm text-muted-foreground">Don&apos;t have an account? </span>
             <motion.button
               type="button"
               onClick={onSwitchToRegister}
@@ -214,7 +214,7 @@ function RegisterForm({ onSwitchToLogin }: { onSwitchToLogin: () => void }) {
       setTimeout(() => {
         onSwitchToLogin();
       }, 2000);
-    } catch (err: any) {
+    } catch (err: unknown) {
       setError(err instanceof Error ? err.message : "An unexpected error occurred.");
     } finally {
       setIsLoading(false);

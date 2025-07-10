@@ -168,7 +168,7 @@ export default function LandingPage() {
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {features.map((feature, featureIndex) => (
               <motion.div
-                key={feature.title}
+                key={`${feature.title}-${featureIndex}`}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: featureIndex * 0.1 }}
