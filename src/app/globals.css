@@ -85,6 +85,22 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+/* Select dropdown visibility fix */
+[data-radix-select-content] {
+  background: hsl(var(--background)) !important;
+  border: 1px solid hsl(var(--border)) !important;
+  backdrop-filter: blur(10px);
+}
+
+[data-radix-select-item] {
+  color: hsl(var(--foreground)) !important;
+}
+
+[data-radix-select-item]:hover {
+  background: hsl(var(--accent)) !important;
+  color: hsl(var(--accent-foreground)) !important;
+}
+
 /* Hover effects */
 .hover-lift {
   transition: transform 0.2s ease, box-shadow 0.2s ease;

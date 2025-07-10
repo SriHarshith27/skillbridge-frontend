@@ -46,22 +46,22 @@ function LoginForm({ onSwitchToRegister }: { onSwitchToRegister: () => void }) {
         </CardHeader>
         
         <form onSubmit={handleLogin}>
-          <CardContent className="space-y-4">
+          <CardContent className="space-y-3">
             {error && (
-              <div className="p-3 text-sm text-red-400 bg-red-500/10 border border-red-500/20 rounded-lg">
+              <div className="p-2 text-sm text-red-400 bg-red-500/10 border border-red-500/20 rounded-lg">
                 {error}
               </div>
             )}
             
             <div className="space-y-2">
-              <Label htmlFor="username">Username</Label>
+              <Label htmlFor="username" className="text-xs">Username</Label>
               <div className="relative">
                 <UserIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                 <Input
                   id="username"
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
-                  className="pl-10"
+                  className="pl-10 h-8 text-sm"
                   placeholder="Enter your username"
                   required
                 />
@@ -69,7 +69,7 @@ function LoginForm({ onSwitchToRegister }: { onSwitchToRegister: () => void }) {
             </div>
             
             <div className="space-y-2">
-              <Label htmlFor="password">Password</Label>
+              <Label htmlFor="password" className="text-xs">Password</Label>
               <div className="relative">
                 <LockClosedIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                 <Input
@@ -77,7 +77,7 @@ function LoginForm({ onSwitchToRegister }: { onSwitchToRegister: () => void }) {
                   type={showPassword ? "text" : "password"}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="pl-10 pr-10"
+                  className="pl-10 pr-10 h-8 text-sm"
                   placeholder="Enter your password"
                   required
                 />
@@ -96,10 +96,10 @@ function LoginForm({ onSwitchToRegister }: { onSwitchToRegister: () => void }) {
             </div>
           </CardContent>
           
-          <CardFooter className="flex flex-col space-y-4">
+          <CardFooter className="flex flex-col space-y-3 pt-4">
             <Button
               type="submit"
-              className="w-full bg-blue-600 hover:bg-blue-700"
+              className="w-full bg-blue-600 hover:bg-blue-700 h-8 text-sm"
               disabled={isLoading}
             >
               {isLoading ? "Signing In..." : "Sign In"}

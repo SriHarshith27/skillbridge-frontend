@@ -82,23 +82,23 @@ export function RegisterForm({ onSuccess }: RegisterFormProps) {
         </CardHeader>
         
         <form onSubmit={handleSubmit}>
-          <CardContent className="space-y-4">
+          <CardContent className="space-y-3">
             {error && (
-              <div className="p-3 text-sm text-red-400 bg-red-500/10 border border-red-500/20 rounded-lg">
+              <div className="p-2 text-sm text-red-400 bg-red-500/10 border border-red-500/20 rounded-lg">
                 {error}
               </div>
             )}
             
             {success && (
-              <div className="p-3 text-sm text-green-400 bg-green-500/10 border border-green-500/20 rounded-lg flex items-center space-x-2">
+              <div className="p-2 text-sm text-green-400 bg-green-500/10 border border-green-500/20 rounded-lg flex items-center space-x-2">
                 <CheckCircleIcon className="h-4 w-4" />
                 <span>{success}</span>
               </div>
             )}
             
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-2 gap-3">
               <div className="space-y-2">
-                <Label htmlFor="username">Username</Label>
+                <Label htmlFor="username" className="text-xs">Username</Label>
                 <div className="relative">
                   <UserIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                   <Input
@@ -106,7 +106,7 @@ export function RegisterForm({ onSuccess }: RegisterFormProps) {
                     name="username"
                     value={formData.username}
                     onChange={handleChange}
-                    className="pl-10"
+                    className="pl-10 h-8 text-sm"
                     placeholder="Username"
                     required
                   />
@@ -114,7 +114,7 @@ export function RegisterForm({ onSuccess }: RegisterFormProps) {
               </div>
               
               <div className="space-y-2">
-                <Label htmlFor="email">Email</Label>
+                <Label htmlFor="email" className="text-xs">Email</Label>
                 <div className="relative">
                   <EnvelopeIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                   <Input
@@ -123,7 +123,7 @@ export function RegisterForm({ onSuccess }: RegisterFormProps) {
                     type="email"
                     value={formData.email}
                     onChange={handleChange}
-                    className="pl-10"
+                    className="pl-10 h-8 text-sm"
                     placeholder="Email"
                     required
                   />
@@ -132,7 +132,7 @@ export function RegisterForm({ onSuccess }: RegisterFormProps) {
             </div>
             
             <div className="space-y-2">
-              <Label htmlFor="password">Password</Label>
+              <Label htmlFor="password" className="text-xs">Password</Label>
               <div className="relative">
                 <LockClosedIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                 <Input
@@ -141,7 +141,7 @@ export function RegisterForm({ onSuccess }: RegisterFormProps) {
                   type={showPassword ? "text" : "password"}
                   value={formData.password}
                   onChange={handleChange}
-                  className="pl-10 pr-10"
+                  className="pl-10 pr-10 h-8 text-sm"
                   placeholder="Password"
                   required
                 />
@@ -159,9 +159,9 @@ export function RegisterForm({ onSuccess }: RegisterFormProps) {
               </div>
             </div>
             
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-2 gap-3">
               <div className="space-y-2">
-                <Label htmlFor="phone">Phone (Optional)</Label>
+                <Label htmlFor="phone" className="text-xs">Phone (Optional)</Label>
                 <div className="relative">
                   <PhoneIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                   <Input
@@ -170,31 +170,31 @@ export function RegisterForm({ onSuccess }: RegisterFormProps) {
                     type="tel"
                     value={formData.phone}
                     onChange={handleChange}
-                    className="pl-10"
+                    className="pl-10 h-8 text-sm"
                     placeholder="Phone"
                   />
                 </div>
               </div>
               
               <div className="space-y-2">
-                <Label htmlFor="role">I want to</Label>
+                <Label htmlFor="role" className="text-xs">I want to</Label>
                 <Select onValueChange={handleRoleChange} defaultValue="USER">
-                  <SelectTrigger id="role">
+                  <SelectTrigger id="role" className="h-8 text-sm bg-background border-input">
                     <SelectValue placeholder="Select role" />
                   </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="USER">Learn new skills</SelectItem>
-                    <SelectItem value="MENTOR">Teach and mentor</SelectItem>
+                  <SelectContent className="bg-background border-border">
+                    <SelectItem value="USER" className="text-sm">Learn new skills</SelectItem>
+                    <SelectItem value="MENTOR" className="text-sm">Teach and mentor</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
             </div>
           </CardContent>
           
-          <CardFooter>
+          <CardFooter className="pt-4">
             <Button
               type="submit"
-              className="w-full bg-blue-600 hover:bg-blue-700"
+              className="w-full bg-blue-600 hover:bg-blue-700 h-8 text-sm"
               disabled={isLoading}
             >
               {isLoading ? "Creating Account..." : "Create Account"}
