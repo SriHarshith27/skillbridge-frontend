@@ -115,7 +115,7 @@ export default function LandingPage() {
                 transition={{ duration: 0.6, delay: 0.6 }}
                 className="grid grid-cols-2 lg:grid-cols-4 gap-6 pt-8"
               >
-                {stats.map((stat, index) => (
+                {stats.map((stat) => (
                   <div key={stat.label} className="text-center">
                     <div className="text-2xl lg:text-3xl font-bold text-blue-400">
                       {stat.number}
