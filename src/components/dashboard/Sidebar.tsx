@@ -3,30 +3,51 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useAuth } from "~/contexts/AuthProvider"; // FIX 1: Import useAuth
 import {
   HomeIcon,
   BookOpenIcon,
   AcademicCapIcon,
-  ChartBarIcon,
   UserGroupIcon,
   CogIcon,
-  QuestionMarkCircleIcon,
-  BellIcon
+  PlusCircleIcon,
 } from "@heroicons/react/24/outline";
+import React from "react";
 
-const navigation = [
+// FIX 2: Define a type for our navigation items for TypeScript safety
+type NavItem = {
+  name: string;
+  href: string;
+  icon: React.ForwardRefExoticComponent<Omit<React.SVGProps<SVGSVGElement>, "ref"> & {
+    title?: string | undefined;
+    titleId?: string | undefined;
+  } & React.RefAttributes<SVGSVGElement>>;
+};
+
+const userNavigation: NavItem[] = [
   { name: "Dashboard", href: "/dashboard", icon: HomeIcon },
-  { name: "My Courses", href: "/dashboard/courses", icon: BookOpenIcon },
-  { name: "Achievements", href: "/dashboard/achievements", icon: AcademicCapIcon },
-  { name: "Progress", href: "/dashboard/progress", icon: ChartBarIcon },
+  { name: "My Courses", href: "/dashboard/my-courses", icon: BookOpenIcon },
+  { name: "Browse All Courses", href: "/dashboard/courses", icon: AcademicCapIcon }, // Let's rename this for clarity
   { name: "Community", href: "/dashboard/community", icon: UserGroupIcon },
-  { name: "Notifications", href: "/dashboard/notifications", icon: BellIcon },
-  { name: "Settings", href: "/dashboard/settings", icon: CogIcon },
-  { name: "Help", href: "/dashboard/help", icon: QuestionMarkCircleIcon },
+];
+
+const mentorNavigation: NavItem[] = [
+  { name: "Dashboard", href: "/dashboard", icon: HomeIcon },
+  { name: "Create Course", href: "/dashboard/create-course", icon: PlusCircleIcon },
+  { name: "My Created Courses", href: "/dashboard/courses", icon: BookOpenIcon },
+  { name: "Student Submissions", href: "/dashboard/submissions", icon: AcademicCapIcon },
+];
+
+const sharedNavigation: NavItem[] = [
+    { name: "Settings", href: "/dashboard/settings", icon: CogIcon },
 ];
 
 export function Sidebar() {
   const pathname = usePathname();
+  const { user } = useAuth();
+
+  // Determine which navigation to display based on the user's role
+  const navigation = user?.role === 'MENTOR' ? mentorNavigation : userNavigation;
 
   return (
     <motion.div
@@ -35,8 +56,8 @@ export function Sidebar() {
       transition={{ duration: 0.5 }}
       className="fixed left-0 top-16 h-[calc(100vh-4rem)] w-64 bg-card border-r border-border overflow-y-auto"
     >
-      <div className="p-6">
-        <nav className="space-y-2">
+      <div className="p-6 flex flex-col h-full">
+        <nav className="space-y-2 flex-grow">
           {navigation.map((item, index) => {
             const isActive = pathname === item.href;
             return (
@@ -64,29 +85,26 @@ export function Sidebar() {
           })}
         </nav>
 
-        {/* Quick Stats */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.4 }}
-          className="mt-8 p-4 bg-secondary rounded-lg"
-        >
-          <h3 className="text-sm font-semibold mb-3">Quick Stats</h3>
-          <div className="space-y-2">
-            <div className="flex justify-between text-xs">
-              <span className="text-muted-foreground">Courses</span>
-              <span className="font-medium text-blue-400">12</span>
-            </div>
-            <div className="flex justify-between text-xs">
-              <span className="text-muted-foreground">Hours</span>
-              <span className="font-medium text-blue-400">48h</span>
-            </div>
-            <div className="flex justify-between text-xs">
-              <span className="text-muted-foreground">Streak</span>
-              <span className="font-medium text-blue-400">7 days</span>
-            </div>
-          </div>
-        </motion.div>
+        {/* Shared navigation at the bottom */}
+        <div className="mt-auto">
+            <nav className="space-y-2 pt-4 border-t border-border">
+                {sharedNavigation.map((item, index) => {
+                    const isActive = pathname === item.href;
+                    return (
+                        <Link
+                            key={item.name}
+                            href={item.href}
+                            className={`flex items-center space-x-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+                                isActive ? 'bg-blue-600 text-white' : 'text-muted-foreground hover:bg-secondary hover:text-foreground'
+                            }`}
+                        >
+                            <item.icon className="h-5 w-5" />
+                            <span>{item.name}</span>
+                        </Link>
+                    );
+                })}
+            </nav>
+        </div>
       </div>
     </motion.div>
   );
