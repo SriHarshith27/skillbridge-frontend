@@ -1,5 +1,10 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+
+This is a Frontend Repository for Project SkillBridge I have been working On, With Next Js as frontend with moderen Tech Stack
+
+Currently Backend is Down/not Up but frontend can be viewed in Vercel
+
 ## Getting Started
 
 First, run the development server:
